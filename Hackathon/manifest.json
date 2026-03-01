@@ -1,0 +1,46 @@
+{
+  "manifest_version": 3,
+  "name": "FocusGuard AI",
+  "version": "2.1",
+  "description": "Block distractions and monitor screen distance with AI",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": [
+        "assets/face-api.min.js",
+        "content/youtube.js",
+        "content/distance.js"
+      ],
+      "css": ["content/content.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "web_accessible_resources": [{
+    "resources": [
+      "assets/models/*",
+      "assets/face-api.min.js"
+    ],
+    "matches": ["<all_urls>"]
+  }],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  }
+}
